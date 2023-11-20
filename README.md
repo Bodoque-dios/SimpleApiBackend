@@ -12,7 +12,7 @@ To use this backend, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/SimpleApiBackend.git
+   git clone https://github.com/Bodoque-dios/SimpleApiBackend.git
    ```
 
 2. **Install Dependencies:**
