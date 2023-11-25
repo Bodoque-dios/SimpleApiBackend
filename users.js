@@ -10,7 +10,7 @@ const db = new sqlite3.Database('./main.db');
 
 
 app.post('/login', (req, res) => {
-  
+	console.log("llego");  
     const username = req.body.username;
     const password = req.body.password;
   
@@ -39,7 +39,7 @@ app.post('/login', (req, res) => {
               if (insertErr) {
                 return console.error(insertErr.message);
               }
-              res.status(200).send(token);
+              res.status(200).send({'token': token});
             });
           } else {
             res.status(401).send('Incorrect password');
@@ -52,7 +52,8 @@ app.post('/login', (req, res) => {
   });
   
 app.post('/register' ,(req, res) => {
-  
+
+    console.log("Registro");  
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
