@@ -72,7 +72,7 @@ app.post('/register' ,(req, res) => {
         res.status(500).send({'response':'User already exists'});
         return console.error("User already exists");
       }
-
+    });
     
 
     bcrypt.hash(password, 10, (err, hash) => {
