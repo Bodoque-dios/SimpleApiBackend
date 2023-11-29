@@ -8,6 +8,9 @@ app.use(express.json());
 
 const db = new sqlite3.Database('./main.db');
 
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+  });
 
 app.post('/login', (req, res) => {
 	console.log("llego");  
@@ -42,11 +45,11 @@ app.post('/login', (req, res) => {
               res.status(200).send({'token': token});
             });
           } else {
-            res.status(401).send('Incorrect password');
+            res.status(401).send({'response':'Incorrect password'});
           }
         });
       } else {
-        res.status(404).send('User not found');
+        res.status(404).send({'response':'User not found'});
       }
     });
   });
@@ -72,10 +75,10 @@ app.post('/register' ,(req, res) => {
   
       db.run(sql, [username, hash, email, firstName, lastName, userType, date, date, 1], (insertErr) => {
         if (insertErr) {
-          res.status(500).send('Error creating user');
+          res.status(500).send({'response':'Error creating user'});
           return console.error(insertErr.message);
         }
-        res.status(200).send('User created');
+        res.status(200).send({'response':'User created'});
       });
     });
   

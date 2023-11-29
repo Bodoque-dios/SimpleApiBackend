@@ -5,7 +5,7 @@ const users = require("./users");
 const cors = require("cors");
 
 const app = express();
-const port = 42069;
+const port =  process.env.PORT || 42069;
 
 app.use(cors())
 app.use(express.json());
