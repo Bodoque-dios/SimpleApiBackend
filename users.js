@@ -64,6 +64,17 @@ app.post('/register' ,(req, res) => {
     const lastName = req.body.lastName;
     const userType = req.body.userType;
   
+    db.get('SELECT * FROM Users WHERE Username = ?', [username], (err, row) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      if(row){
+        res.status(500).send({'response':'User already exists'});
+        return console.error("User already exists");
+      }
+
+    
+
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         return console.error(err.message);
