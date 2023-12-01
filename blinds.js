@@ -8,9 +8,9 @@ var pos = "arriba"
 app.get('/estado', (req, res) => {
   console.log("estado: " + estado)
   if (estado == "subir"){
-    res.send('0')
+    res.send('0\n')
   } else if (estado == "bajar") {
-    res.send('1')
+    res.send('1\n')
   } else {
     res.send('nada')
   }
