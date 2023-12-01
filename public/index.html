@@ -69,7 +69,13 @@
             e.preventDefault();
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            fetch("https://yoahorro.onrender.com/api/users/login")
+            fetch("https://yoahorro.onrender.com/api/users/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username, password})
+            })
             .then(res => {
                 if (res.status === 200) {
                     document.getElementById("login").classList.add("d-none");
