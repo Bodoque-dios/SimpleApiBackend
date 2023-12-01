@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css.css">
-    <link rel="stylesheet" href="/bootstrap-5.3.2-dist/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Persismart</title>
+    <style>
+        body {
+            margin-bottom: 70px; /* Adjust the margin to accommodate the footer */
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+
+
+
+
     <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand h1" href="#">
@@ -16,39 +33,71 @@
                 Persismart
             </a>
         </div>
-      </nav>
+    </nav>
 
-<br><br>
-
-    <div class="d-grid gap-3 px-5 ">
-        <button class="btn btn-primary btn-lg" onclick="sube()" type="button">Subir</button>
-        <button class="btn btn-warning btn-lg" onclick="down()" type="button">Bajar</button>
+    <br><br>
+    <div id="login" class="container d-flex justify-content-center align-items-center vh-80" onsubmit="handleLogin(event)">
+        <div class="card p-4 shadow">
+            <h2 class="text-center mb-4">Login</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+            </form>
+        </div>
     </div>
-<br><br>
-
-<style>
-    .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-}
-</style>
-
-
+    <main id="main" class="d-none">
+        <div class="d-grid gap-3 px-5">
+            <button class="btn btn-primary btn-lg" onclick="sube()" type="button">Subir</button>
+            <button class="btn btn-warning btn-lg" onclick="down()" type="button">Bajar</button>
+        </div>
+    </main>
+    <br><br>
     <div class="footer">
         &copy; 2023 Compralotodo. All rights reserved.
     </div>
+  
+    <script>
 
+        const handleLogin = (e) => {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            fetch("https://yoahorro.onrender.com/api/users/login")
+            .then(res => {
+                if (res.status === 200) {
+                    document.getElementById("login").classList.add("d-none");
+                    document.getElementById("main").classList.remove("d-none");
+                    window.location.href = "/main.html";
+                } else {
+                    alert("Usuario o contraseña incorrectos");
+                }
+            }).catch(err => {
+                alert("Usuario o contraseña incorrectos");
+            });
+        }
+
+        const sube = () => {
+            fetch("https://yoahorro.onrender.com/api/blinds/subir", {
+                method: 'POST'
+            }).then(res => {
+                alert("Subiendo!");
+            })
+        }
+
+        const down = () => {
+            fetch("https://yoahorro.onrender.com/api/blinds/bajar", {
+                method: 'POST'
+            }).then(res => {
+                alert("Bajando!");
+            })
+        }
+    </script>
 </body>
 </html>
-<script>
-    const sube = () =>{
-    fetch("http://129.151.125.31:42069/subir", {
-    method: 'POST'})}
-
-    const down = () =>{
-    fetch("http://129.151.125.31:42069/bajar", {
-    method: 'POST'})
-    }
-</script>

@@ -30,22 +30,7 @@ app.post("/login", (req, res) => {
 
         if (bcryptRes) {
           const token = uuidv4();
-
-          const insertSessionSql =
-            "INSERT INTO Sessions (UserID, Token, DateExpires) VALUES (?, ?, ?)";
-          const date = new Date();
-          const dateExpires = date.setDate(date.getDate() + 1);
-
-          db.run(
-            insertSessionSql,
-            [row.UserID, token, dateExpires],
-            (insertErr) => {
-              if (insertErr) {
-                return console.error(insertErr.message);
-              }
-              res.status(200).send({ token: token });
-            }
-          );
+          res.status(200).send({ token: token });
         } else {
           res.status(401).send({ response: "Incorrect password" });
         }
