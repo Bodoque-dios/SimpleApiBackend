@@ -8,9 +8,6 @@ app.use(express.json());
 
 const db = new sqlite3.Database("./main.db");
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
 app.post("/login", (req, res) => {
   console.log("llego");

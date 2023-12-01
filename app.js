@@ -1,6 +1,7 @@
 const express = require("express");
 
 const users = require("./users");
+const blinds = require("./blinds");
 
 const cors = require("cors");
 
@@ -11,6 +12,7 @@ app.use(cors())
 app.use(express.json());
 
 app.use("/api/users", users);
+app.use("/api/blinds", blinds);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
